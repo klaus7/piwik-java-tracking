@@ -535,9 +535,8 @@ public class SimplePiwikTracker implements PiwikTracker {
      * Sets the event category. Must not be empty. (eg. Videos, Music, Games...)
      * 
      * @param eventCategory the event category
-     * @throws PiwikException if event category is <code>Null</code> or empty
      */
-    public void setEventCategory(final String eventCategory) throws PiwikException {
+    public void setEventCategory(final String eventCategory) {
         this.eventCategory = eventCategory;
     }
 
@@ -545,9 +544,8 @@ public class SimplePiwikTracker implements PiwikTracker {
      * Sets the event action. Must not be empty. (eg. Play, Pause, Duration, Add Playlist, Downloaded, Clicked...).
      * 
      * @param eventAction the event action
-     * @throws PiwikException if event action is <code>Null</code> or empty
      */
-    public void setEventAction(final String eventAction) throws PiwikException {
+    public void setEventAction(final String eventAction)  {
         this.eventAction = eventAction;
     }
 
@@ -570,7 +568,7 @@ public class SimplePiwikTracker implements PiwikTracker {
     }
 
     /**
-     * Returns the uery part for the url with all parameters from all given informations set to this tracker. This
+     * Returns the query part for the url with all parameters from all given informations set to this tracker. This
      * function is called in the defined URL for the tacking purpose.
      * 
      * @return the query part for the URL as string object
@@ -786,7 +784,7 @@ public class SimplePiwikTracker implements PiwikTracker {
      * @param input
      * @return String
      */
-    private String urlencode(final String input) {
+    private static String urlencode(final String input) {
         String output;
         try {
             output = URLEncoder.encode(input, "UTF-8");
@@ -900,10 +898,11 @@ public class SimplePiwikTracker implements PiwikTracker {
      * @return ResponseData
      * @throws PiwikException
      */
-    public final ResponseData sendRequest(final URL destination) throws PiwikException {
+    public synchronized ResponseData sendRequest(final URL destination) throws PiwikException {
         ResponseData responseData = null;
         if (destination != null) {
-            try {
+			System.out.println("TRACKING: " + destination);
+			try {
                 LOGGER.log(Level.FINE, "try to open piwik request url: {0}", destination);
 
                 HttpURLConnection connection = (HttpURLConnection) destination.openConnection();

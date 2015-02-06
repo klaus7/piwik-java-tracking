@@ -32,7 +32,7 @@ public class ResponseData {
 	/**
 	 * For debug output.
 	 */
-        private static final Logger LOGGER = Logger.getLogger(ResponseData.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ResponseData.class.getName());
 
 	/**
 	 * Initialize the local header data with the header fields from the connection.
