@@ -901,7 +901,7 @@ public class SimplePiwikTracker implements PiwikTracker {
     public synchronized ResponseData sendRequest(final URL destination) throws PiwikException {
         ResponseData responseData = null;
         if (destination != null) {
-			System.out.println("TRACKING: " + destination);
+			LOGGER.log(Level.INFO, "TRACKING: " + destination);
 			try {
                 LOGGER.log(Level.FINE, "try to open piwik request url: {0}", destination);
 
